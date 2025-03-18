@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 
 public class Cuffie extends Prodotto {
 
-    private String[] colori;
-    private boolean cablate;
+    protected String colori;
+    protected boolean cablate;
 
-    public Cuffie (int codice, String nome, String marca, BigDecimal prezzo, BigDecimal iva, String[] colori, boolean cablate) {
-        super(codice, nome, marca, prezzo, iva);
+    public Cuffie(String nome, String marca, BigDecimal prezzo, String colori, boolean cablate) {
+        super(nome, marca, prezzo);
         this.colori = colori;
         this.cablate = cablate;
     }
 
-    public String[] getColori() {
+    public String getColori() {
         return colori;
     }
 
-    public void setColori(String[] colori) {
+    public void setColori(String colori) {
         this.colori = colori;
     }
 
@@ -27,6 +27,11 @@ public class Cuffie extends Prodotto {
 
     public void setCablate(boolean cablate) {
         this.cablate = cablate;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nColore : " + getColori() + "\nCablate : " + isCablate();
     }
 
 }

@@ -2,25 +2,22 @@ package org.lessons.shop;
 
 import java.math.BigDecimal;
 
-public class Televisori extends Prodotto{
-    
-    private String[] dimensioni;
-    private Boolean smart;
+public class Televisori extends Prodotto {
 
-    public Televisori(int codice, String nome, String marca, BigDecimal prezzo, BigDecimal iva, String[] dimensioni, Boolean smart) {
-        super(codice, nome, marca, prezzo, iva);
+    protected String dimensioni;
+    protected Boolean smart;
+
+    public Televisori(String nome, String marca, BigDecimal prezzo, String dimensioni, Boolean smart) {
+        super(nome, marca, prezzo);
         this.dimensioni = dimensioni;
         this.smart = smart;
     }
 
-    public String[] getDimensioni() {
+    public String getDimensioni() {
         return dimensioni;
     }
 
-    public void setDimensioni(String[] dimensioni) {
-        for (int i = 0; i < dimensioni.length; i++) {
-            this.dimensioni[i] = "Lo schermo del televisore è grande " + dimensioni[i] + " pollici";
-        }
+    public void setDimensioni(String dimensioni) {
         this.dimensioni = dimensioni;
     }
 
@@ -30,6 +27,11 @@ public class Televisori extends Prodotto{
 
     public void setSmart(Boolean smart) {
         this.smart = smart;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nDimensioni :" + getDimensioni() + "\nSmart :" + getSmart();
     }
 
 }
