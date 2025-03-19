@@ -7,8 +7,8 @@ public class Smartphone extends Prodotto {
     protected String imei;
     protected String memoria;
 
-    public Smartphone(String nome, String marca, BigDecimal prezzo, String imei, String memoria) {
-        super(nome, marca, prezzo);
+    public Smartphone(String nome, String marca, BigDecimal prezzo, boolean cartaFedelta, String imei, String memoria) {
+        super(nome, marca, prezzo, cartaFedelta);
         this.imei = imei;
         this.memoria = memoria;
     }

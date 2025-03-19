@@ -28,6 +28,9 @@ public class Carrello {
             System.out.println("Inserisci il prezzo");
             BigDecimal prezzo = scanner.nextBigDecimal();
 
+            System.out.println("Hai la carta fedeltà? (true/false)");
+            boolean cartaFedelta = scanner.nextBoolean();
+
             switch (tipoProdotto) {
                 case 1:
                     System.out.println("Inserisci l'IMEI");
@@ -36,8 +39,14 @@ public class Carrello {
                     System.out.println("Inserisci la memoria");
                     String memoria = scanner.next();
 
-                    Smartphone smartphone = new Smartphone(nome, marca, prezzo, imei, memoria);
+                    Smartphone smartphone = new Smartphone(nome, marca, prezzo, cartaFedelta, imei, memoria);
                     prodotti[i] = smartphone;
+
+                    if (cartaFedelta == true && smartphone.getMemoria().equals("32GB")) {
+                        smartphone.getPrezzoIvato().subtract(prezzo.multiply(new BigDecimal(0.05)));
+                    } else if (cartaFedelta == true && smartphone.getMemoria() != "32GB") {
+                        smartphone.getPrezzoScontato();
+                    }
 
                     System.out.println(smartphone.toString());
 
@@ -49,8 +58,14 @@ public class Carrello {
                     System.out.println("Il televisore è smart? (true/false)");
                     Boolean smart = scanner.nextBoolean();
 
-                    Televisori tv = new Televisori(nome, marca, prezzo, dimensioni, smart);
+                    Televisori tv = new Televisori(nome, marca, prezzo, cartaFedelta, dimensioni, smart);
                     prodotti[i] = tv;
+
+                    if (cartaFedelta == true && tv.getSmart() == true) {
+                        tv.getPrezzoIvato().subtract(prezzo.multiply(new BigDecimal(0.10)));
+                    } else if (cartaFedelta == true && tv.getSmart() == false) {
+                        tv.getPrezzoScontato();
+                    }
 
                     System.out.println(tv.toString());
 
@@ -62,8 +77,14 @@ public class Carrello {
                     System.out.println("Le cuffie sono cablate? (true/false)");
                     boolean cablate = scanner.nextBoolean();
 
-                    Cuffie cuffie = new Cuffie(nome, marca, prezzo, colori, cablate);
+                    Cuffie cuffie = new Cuffie(nome, marca, prezzo, cartaFedelta, colori, cablate);
                     prodotti[i] = cuffie;
+
+                    if (cartaFedelta == true && cuffie.isCablate() == true) {
+                        cuffie.getPrezzoIvato().subtract(prezzo.multiply(new BigDecimal(0.07)));
+                    } else if (cartaFedelta == true && cuffie.isCablate() == false) {
+                        cuffie.getPrezzoScontato();
+                    }
 
                     System.out.println(cuffie.toString());
 

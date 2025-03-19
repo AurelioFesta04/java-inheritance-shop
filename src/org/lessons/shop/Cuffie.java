@@ -7,8 +7,8 @@ public class Cuffie extends Prodotto {
     protected String colori;
     protected boolean cablate;
 
-    public Cuffie(String nome, String marca, BigDecimal prezzo, String colori, boolean cablate) {
-        super(nome, marca, prezzo);
+    public Cuffie(String nome, String marca, BigDecimal prezzo, boolean cartaFedelta, String colori, boolean cablate) {
+        super(nome, marca, prezzo, cartaFedelta);
         this.colori = colori;
         this.cablate = cablate;
     }

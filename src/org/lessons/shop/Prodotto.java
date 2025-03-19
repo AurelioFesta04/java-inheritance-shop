@@ -14,25 +14,24 @@ public class Prodotto {
     private String marca;
     private BigDecimal prezzo;
     private BigDecimal iva;
+    private boolean cartaFedelta;
 
-    private BigDecimal cartaFedelta;
-
-    public Prodotto(String nome, String marca, BigDecimal prezzo) {
-        this.codice = Prodotto.random.nextInt(999999);
-        this.nome = nome;
-        this.marca = marca;
-        this.prezzo = prezzo;
-        this.iva = new BigDecimal(0.22);
-        this.cartaFedelta = new BigDecimal(0.02);
+    public Prodotto(String nome, String marca, BigDecimal prezzo, boolean cartaFedelta) {
+            this.codice = Prodotto.random.nextInt(999999);
+            this.nome = nome;
+            this.marca = marca;
+            this.prezzo = prezzo;
+            this.iva = new BigDecimal(0.22);
+            this.cartaFedelta = cartaFedelta;
     }
 
-    public Prodotto(String nome, BigDecimal prezzo, BigDecimal iva, BigDecimal cartaFedelta) {
+    public Prodotto(String nome, BigDecimal prezzo, BigDecimal iva, boolean cartaFedelta) {
         this.codice = Prodotto.random.nextInt(999999);
         this.nome = nome;
         this.marca = "N/A";
         this.prezzo = prezzo;
         this.iva = new BigDecimal(0.22);
-        this.cartaFedelta = new BigDecimal(0.02);
+        this.cartaFedelta = cartaFedelta;
     }
 
     public int getCodice() {
@@ -78,15 +77,19 @@ public class Prodotto {
         return null;
     }
 
-    public BigDecimal getCartaFedelta() {
+    public void setPrezzoIvato() {
+        this.prezzo.add(this.prezzo.multiply(this.iva)).setScale(2, RoundingMode.DOWN);
+    }
+
+    public boolean isCartaFedelta() {
         return cartaFedelta;
     }
 
     public BigDecimal getPrezzoScontato() {
-        if (prezzo != null && cartaFedelta != null) {
-            return this.prezzo.subtract(this.prezzo.multiply(this.cartaFedelta)).setScale(2, RoundingMode.DOWN);
+        if (cartaFedelta) {
+            return this.prezzo.subtract(iva.multiply(this.prezzo)).setScale(2, RoundingMode.DOWN);
         }
-        return null;
+        return this.prezzo;
     }
 
     @Override
